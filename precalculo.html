@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>programa precalculo</title>
-  <link rel="stylesheet" href="Calculo.css">
-  <script src="Calculo.js"></script>
-
+    <meta charset="UTF-8">
+    <title>programa precalculo</title>
+    <link rel="stylesheet" href="precalculo.css">
 </head>
 <body>
 <div class="card"> 
@@ -14,6 +12,13 @@
     <button onclick="calcularDominio()">Calcular</button>
     <div class="resultado" id="salida"></div>
 </div>  
-  
+<div class="card">
+    <h3>Grafica fracción</h3>
+    <canvas id="myChart" width="400" height="400"></canvas>
+</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="precalculo.js"></script>
+    <script src="grafica.js"></script>
 </body>
 </html>

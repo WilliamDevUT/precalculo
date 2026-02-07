@@ -2,9 +2,9 @@
 function calcularDominio() {
     const entrada = document.getElementById("operacion").value;
     const salida = document.getElementById('salida');
+    graficar(entrada);
 
-    
-    
+
     if (entrada.includes("/")==false) {
     console.log("La operación no tiene fracción");
     salida.innerHTML = "⚠️ La expresión no es una fracción.";
@@ -17,7 +17,7 @@ function calcularDominio() {
     denominador = denominador.trim().replace("(", "").replace(")", "");
     //---
     console.log("Numerador:", numerador);
-    salida.innerHTML = "Numerador:", numerador;
+    salida.innerHTML = `Numerador: ${numerador}`;
     console.log("Denominador:", denominador);
     salida.innerHTML = "Denominador:", denominador;
 
@@ -113,4 +113,37 @@ function calcularDominio() {
         salida.innerHTML =`Dominio: Todos los reales excepto x = ${x1} y x = ${x2}`;
     }
     }
+}
+
+function generarDatos(entrada) {
+    let xs = [];
+    let ys = [];
+
+    for (let x = -10; x <= 10; x += 0.5) {
+    let y;
+    try {
+        y = eval(entrada.replaceAll('x', `(${x})`));
+        if (isFinite(y)) {
+            xs.push(x);
+            ys.push(y);
+        } else {
+            xs.push(x);
+            ys.push(null);
+        }
+    } catch (e) {
+        xs.push(x);
+        ys.push(null);
+    }
+    }
+    return { xs, ys };
+}
+
+function graficar(entrada) {
+    const { xs, ys } = generarDatos(entrada);
+
+    chart.data.labels = xs;
+    chart.data.datasets[0].data = ys;
+    chart.data.datasets[0].label = `y = ${entrada}`;
+
+    chart.update();
 }
